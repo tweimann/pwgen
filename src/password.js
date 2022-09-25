@@ -1,15 +1,11 @@
-// packages
-
-// define vars
-const alphabet = "abcdefghijklmnopqrstuvwxyz"
-const ambiguous = "lI1O0"
-let charList = []
-let charListForm = ""
-let passwd = ""
-let output = ""
-
 module.exports = {
     generate: function (param, length) {
+        // define vars
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        const ambiguous = "lI1O0"
+        let charList = []
+        let output = ""
+
         // generate charList to chose characters from
         if(param.match("a")) {
             charList.push(alphabet.toLowerCase())

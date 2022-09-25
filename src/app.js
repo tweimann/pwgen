@@ -11,4 +11,4 @@ console.log(pw.generate("AasnO", 10))
 
 setTimeout(function() {
     console.log(pp.generate("DEN", 4, "-"))
-}, 1000)
+}, 2000)

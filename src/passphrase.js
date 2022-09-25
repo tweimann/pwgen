@@ -55,7 +55,7 @@ module.exports = {
     generate: function (param, length, delimiter) {
         // define vars
         let usableWords = []
-        let passphrase = []
+        let passphrase = ""
         let num = ""
         let output = ""
 
@@ -72,16 +72,17 @@ module.exports = {
 
         for (let i = 0; i < length; i++) {
             if (!/\d/g.test(passphrase) && Math.random() >= ((length - i) / 10)) {
-                num = Math.floor(Math.random * 9)
+                num = Math.floor(Math.random() * 9)
             }
-            if (i == length) {
+            if (i == length - 1) {
                 delimiter = ""
             }
-            passphrase += length[Math.floor(Math.random() * usableWords.length)]
+            passphrase += usableWords[Math.floor(Math.random() * usableWords.length)]
                         + num
                         + delimiter
         }
 
+        output = passphrase
         return output
     }
 }

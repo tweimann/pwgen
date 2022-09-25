@@ -2,6 +2,7 @@
 
 // define vars
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const ambiguous = "lI1O0"
 let charList = []
 let charListForm = ""
 let passwd = ""
@@ -25,6 +26,13 @@ module.exports = {
 
         // join charList
         charList = charList.join("")
+
+        // remove ambiguous characters
+        if (param.match("O")) {
+            for (let i = 0; i < ambiguous.length; i++) {
+                charList = charList.replace(ambiguous[i], "")
+            }
+        }
 
         //generate password
         for (let i = 0; i < length; i++) {

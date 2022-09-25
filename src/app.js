@@ -6,4 +6,4 @@ const pw = require('./password.js')
 log.console('info', 'Hello World!')
 
 // debug
-console.log(pw.generate("aA", 10))
+console.log(pw.generate("AasnO", 10))

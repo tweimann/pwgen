@@ -1,25 +1,46 @@
 // imports
-const log = require('./log.js')
-const pw = require('./password.js')
-const pp = require('./passphrase.js')
-const { config } = require('dotenv')
-config()
+const log = require('./log.js');
+const pw = require('./password.js');
+const pp = require('./passphrase.js');
+const { config } = require('dotenv');
+config();
+const express = require('express');
+const app = express();
+const querystring = require('querystring');
 
 // get dotenv vars
-const settings = {
-    debug: process.env.DEBUG,
-    tele: process.env.TELEMETRY,
-    imprint: process.env.IMPRINTADDR
+const conf = {
+    "debug": process.env.DEBUG,
+    "port": process.env.PORT
 }
 
-// hello world
-log.console('info', 'Hello World!')
+// serve static pages
+app.use(express.static('src/public'))
+
+// api code to get passwords/phrases
+app.get('/api', function (req, res) {
+    // parse request
+    let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
+    if (query.type == 'password') {
+        res.send("{ 'success': 'true', 'content': '" + pw.generate(query.param, query.length) + "' }").on('err', (e) => log.console('fail', e))
+    } else if (query.type == 'passphrase') {
+        res.send("{ 'success': 'true', 'content': '" + pp.generate(query.param, query.length, query.delimiter) + "' }").on('err', (e) => log.console('fail', e))
+    } else {
+        res.status(400).send("{ 'success': 'false', 'content': 'lmao bad request try again'")
+    }
+
+})
+
+// listen on port defined in dotenv
+app.listen(conf.port, () => {
+    log.console('info', 'App listening at Port ' + conf.port)
+})
 
 // debug
-if (settings.debug) {
+if (conf.debug) {
     setTimeout(function() {
-        console.log(pw.generate("AasnO", 10))
-        console.log(pp.generate("DEN", 4, "-"))
-        console.log(pp.generate("DENC", 4, "-"))
-    }, 2000)
+        log.console('debug', pw.generate("AasnO", 10))
+        log.console('debug', pp.generate("DEN", 4, "-"))
+        log.console('debug', pp.generate("DENC", 4, "-"))
+    }, 1000)
 }

@@ -17,7 +17,7 @@ module.exports = {
             charList.push("0123456789")
         }
         if(param.match("s")) {
-            charList.push("!\"§$%&/?=+-_*#':;.,<>ÄÖÜ{}[]()")
+            charList.push("!§$%&/?=+-_*#:;.,<>{}[]()")
         }
 
         // join charList

@@ -3,6 +3,11 @@ const log = require('./log.js')
 const fs =  require("fs")
 const { parse } = require("csv-parse")
 
+// word processing functions
+function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
+}
+
 // read/import files
 let wl = {
     de: [],
@@ -10,11 +15,10 @@ let wl = {
     names: []
 }
 
-{
 fs.createReadStream("./static/wl_de.txt")
     .pipe(parse({ delimiter: "\n"}))
     .on("data", function (row) {
-        wl.de.push(row)
+        wl.de.push(String(row).toLowerCase())
     })
     .on("error", function (error) {
         log.console('fail', error.message)
@@ -26,7 +30,7 @@ fs.createReadStream("./static/wl_de.txt")
 fs.createReadStream("./static/wl_en.txt")
     .pipe(parse({ delimiter: "\n"}))
     .on("data", function (row) {
-        wl.en.push(row)
+        wl.en.push(String(row).toLowerCase())
     })
     .on("error", function (error) {
         log.console('fail', error.message)
@@ -38,7 +42,7 @@ fs.createReadStream("./static/wl_en.txt")
 fs.createReadStream("./static/wl_names.txt")
     .pipe(parse({ delimiter: "\n"}))
     .on("data", function (row) {
-        wl.names.push(row)
+        wl.names.push(String(row).toLowerCase())
     })
     .on("error", function (error) {
         log.console('fail', error.message)
@@ -46,10 +50,6 @@ fs.createReadStream("./static/wl_names.txt")
     .on("end", function () {
         log.console('info', "finished reading ./static/wl_names.txt")
     })
-}
-
-// debug
-//console.log(wl.de[0] + wl.en[0] + wl.names[0])
 
 module.exports = {
     generate: function (param, length, delimiter) {
@@ -58,26 +58,45 @@ module.exports = {
         let passphrase = ""
         let num = ""
         let output = ""
+        let word = ""
 
         // define usable words
         if (param.match("D")) {
-            usableWords.push(wl.de)
+            wl.de.map(item => {
+                usableWords.push(item)
+            })
         }
         if (param.match("E")) {
-            usableWords.push(wl.en)
+            wl.en.map(item => {
+                usableWords.push(item)
+            })
         }
         if (param.match("N")) {
-            usableWords.push(wl.names)
+            wl.names.map(item => {
+                usableWords.push(item)
+            })
         }
 
+        // build the passphrase
         for (let i = 0; i < length; i++) {
-            if (!/\d/g.test(passphrase) && Math.random() >= ((length - i) / 10)) {
+            // decide if there should be a number behind the word
+            num = ""
+            if (!(/\d/g.test(passphrase)) && (Math.random() >= ((length - i + 1) / 10))) {
                 num = Math.floor(Math.random() * 9)
             }
+            // don't add a delimiter after the last word
             if (i == length - 1) {
                 delimiter = ""
             }
-            passphrase += usableWords[Math.floor(Math.random() * usableWords.length)]
+        
+            if (param.match("C")) {
+                word = capitalizeFirstLetter(String(usableWords[Math.floor(Math.random() * usableWords.length)]))
+            } else {
+                word = String(usableWords[Math.floor(Math.random() * usableWords.length)])
+            }
+            
+            // combine the passphrase
+            passphrase += word
                         + num
                         + delimiter
         }

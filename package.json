@@ -20,6 +20,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "csv-parse": "^5.3.0",
+    "dotenv": "^16.0.2",
     "vue": "^3.2.39"
   }
 }

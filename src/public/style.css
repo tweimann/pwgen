@@ -8,29 +8,28 @@ a:hover {
 }
 
 body {
-    color: white;
     background-color: #0d1117;
-    font-family: 'Roboto', sans-serif;
-    
+    font-family: 'Roboto';
 }
-
+/*
 html {
     font-size: 100%;
     box-sizing: border-box;
 }
-
+*/
  /*---*/
-
+/*
 *, *::before, *::after {
     box-sizing: inherit;
 }
+*/
 
-.centered {
-    position: absolute;
-    height: 90%;
-    top: 50%;
-    left: 50%;
+.pw-app  {
+    position: inherit;
+    margin-top: 50px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    width: 1300px;
     max-width: 90%;
-    -ms-transform: translateY(-50%) translateX(-50%);
-    transform: translateY(-50%) translateX(-50%);
+    border-radius: 10px;
 }

@@ -1,16 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css">
-        <link href="Roboto-Regular.ttf" rel="stylesheet">
-        <title>Password Generator</title>
-    </head>
-    <body>
-        <div id="app" class="centered">
-            <h1>test</h1>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://content.tweimann.xyz/fonts/Roboto-Regular.ttf" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>pwgen</title>
+  </head>
+  <body>
+
+    <!--Bootstrap-->
+    <div class="container pw-app bg-light">
+      <div class="row">
+
+        <!--Password Generator-->
+        <div class="col">
+          <form>
+            <p class="h1">Password Generator</p>
+            <hr>
+            <p class="h4">Charset</p>
+            <div class="form-group" style="margin-right: 5px; float: none;">
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> Lowercase
+              </label>
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> Uppercase
+              </label>
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> Numbers
+              </label>
+              <label class="checkbox">
+                <input type="checkbox"> Symbols
+              </label>
+              <hr>
+              <p class="h4">Extras</p>
+              <label class="checkbox">
+                <input type="checkbox"> Avoid Ambiguous Characters
+              </label>
+              <hr>
+              <div class="">
+                <input class="btn btn-primary form-control" type="submit" value="Submit">
+                <br><br>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon3">Output</span>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <script src="script.js"></script>
-    </body>
+
+        <!--Passphrase Generator-->
+        <div class="col">
+          <form>
+            <p class="h1">Passphrase Generator</p>
+            <hr>
+            <p class="h4">Wordlists</p>
+            <div class="form-group" style="margin-right: 0px; float: none;">
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> German
+              </label>
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> English
+              </label>
+              <label class="checkbox" style="margin-right: 10px;">
+                <input type="checkbox"> Names
+              </label>
+              <hr>
+              <p class="h4">Extras</p>
+              <label class="checkbox">
+                <input type="checkbox"> Add a Number
+              </label>
+              <br><br>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Delimiter</span>
+                <input type="text" class="form-control" placeholder="-">
+                <span class="input-group-text">Length</span>
+                <input type="text" class="form-control" placeholder="4">
+              </div>              
+              <hr>
+              <input class="btn btn-primary form-control" type="submit" value="Submit">
+              <br><br>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Output</span>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
+              </div>              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--Bootstrap end-->
+
+    <script src="script.js"></script>
+    <script src="bootstrap/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
 </html>

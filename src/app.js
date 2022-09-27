@@ -11,6 +11,7 @@ const querystring = require('querystring');
 // get dotenv vars
 const conf = {
     "debug": process.env.DEBUG,
+    "tele": process.env.TELEMETRY,
     "port": process.env.PORT
 }
 
@@ -28,6 +29,7 @@ app.get('/api', function (req, res) {
     } else {
         res.status(400).send("{ 'success': 'false', 'content': 'lmao bad request try again'")
     }
+    if (conf.tele) {log.console('info', 'someone just generated a ' + query.type)}
 
 })
 
@@ -37,7 +39,7 @@ app.listen(conf.port, () => {
 })
 
 // debug
-if (conf.debug) {
+if (conf.debug == true) {
     setTimeout(function() {
         log.console('debug', pw.generate("AasnO", 10))
         log.console('debug', pp.generate("DEN", 4, "-"))

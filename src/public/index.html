@@ -16,78 +16,78 @@
 
         <!--Password Generator-->
         <div class="col">
-          <form>
-            <p class="h1">Password Generator</p>
+          <p class="h1">Password Generator</p>
+          <hr>
+          <p class="h4">Charset</p>
+          <div class="form-group" style="margin-right: 5px; float: none;">
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox" id="param-pw-lowercase" value="yes"> Lowercase
+            </label>
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox" id="param-pw-uppercase" value="yes"> Uppercase
+            </label>
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox" id="param-pw-numbers" value="yes"> Numbers
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="param-pw-symbols" value="yes"> Symbols
+            </label>
             <hr>
-            <p class="h4">Charset</p>
-            <div class="form-group" style="margin-right: 5px; float: none;">
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> Lowercase
-              </label>
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> Uppercase
-              </label>
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> Numbers
-              </label>
-              <label class="checkbox">
-                <input type="checkbox"> Symbols
-              </label>
+            <p class="h4">Extras</p>
+            <label class="checkbox">
+              <input type="checkbox" id="param-pw-ambiguous" value="yes"> Avoid Ambiguous Characters
+            </label>
+            <hr>
+            <p class="h4">Length</p>
+            <input type="text" class="form-control" aria-describedby="basic-addon3" value="20" id="param-pw-length" onchange="refreshPWLength(id, value)">
+            <input type="range" class="form-range" min="8" value="24" max="128" id="param-pw-range" onchange="refreshPWLength(id, value)">
+            <div class="">
               <hr>
-              <p class="h4">Extras</p>
-              <label class="checkbox">
-                <input type="checkbox"> Avoid Ambiguous Characters
-              </label>
-              <hr>
-              <div class="">
-                <input class="btn btn-primary form-control" type="submit" value="Submit">
-                <br><br>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">Output</span>
-                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
-                </div>
+              <input class="btn btn-primary form-control" type="submit" value="Submit" onclick="submitPassword()">
+              <br><br>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Output</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon3" id="pw-output" readonly>
               </div>
             </div>
-          </form>
+          </div>
         </div>
 
         <!--Passphrase Generator-->
         <div class="col">
-          <form>
-            <p class="h1">Passphrase Generator</p>
+          <p class="h1">Passphrase Generator</p>
+          <hr>
+          <p class="h4">Wordlists</p>
+          <div class="form-group" style="margin-right: 0px; float: none;">
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox"> German
+            </label>
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox"> English
+            </label>
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox"> Names
+            </label>
             <hr>
-            <p class="h4">Wordlists</p>
-            <div class="form-group" style="margin-right: 0px; float: none;">
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> German
-              </label>
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> English
-              </label>
-              <label class="checkbox" style="margin-right: 10px;">
-                <input type="checkbox"> Names
-              </label>
-              <hr>
-              <p class="h4">Extras</p>
-              <label class="checkbox">
-                <input type="checkbox"> Add a Number
-              </label>
-              <br><br>
-              <div class="input-group mb-3">
-                <span class="input-group-text">Delimiter</span>
-                <input type="text" class="form-control" placeholder="-">
-                <span class="input-group-text">Length</span>
-                <input type="text" class="form-control" placeholder="4">
-              </div>              
-              <hr>
-              <input class="btn btn-primary form-control" type="submit" value="Submit">
-              <br><br>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">Output</span>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
-              </div>              
-            </div>
-          </form>
+            <p class="h4">Extras</p>
+            <label class="checkbox">
+              <input type="checkbox"> Add a Number
+            </label>
+            <br><br>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Delimiter</span>
+              <input type="text" class="form-control" value="-">
+              <span class="input-group-text">Length</span>
+              <input type="text" class="form-control" value="4">
+            </div>              
+            <hr>
+            <input class="btn btn-primary form-control" type="submit" value="Submit">
+            <br><br>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3">Output</span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
+            </div>              
+          </div>
         </div>
       </div>
     </div>

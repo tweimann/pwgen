@@ -17,11 +17,11 @@ docker run -p 5000:5000\
 ### files used for passphrase-generation
 - [dwyls english word list](https://github.com/dwyl/english-words/) (i used words_dictionary.json)
 - [netzmafia's german word & name list](http://www.netzmafia.de/software/wordlists/)
-#### i used this command to filter out the non-alpha words: 
+- i used this command to filter out the non-alpha words: 
 ```bash
 grep -x '[[:alpha:]]*' <path-to-txt-file> > wl_<scope>.txt
 ```
-#### and this command to kind-of convert the others to json:
+- and this command to kind-of convert the others to json:
 ```bash
 sed 's/.*/"&",/g' wl_names.txt > wl_names.txt.test
 ```

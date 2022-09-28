@@ -12,22 +12,28 @@ const querystring = require('querystring');
 const conf = {
     "debug": process.env.DEBUG,
     "tele": process.env.TELEMETRY,
+    "imprint": process.env.IMPRINTADDR,
     "port": process.env.PORT
 }
 
 // serve static pages
 app.use(express.static('src/public'))
 
+// redirect to imprint
+app.get('/imprint', function(req, res){
+    res.redirect(conf.imprint);
+});
+
 // api code to get passwords/phrases
 app.get('/api', function (req, res) {
     // parse request
     let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
     if (query.type == 'password') {
-        res.send("{ 'success': 'true', 'content': '" + pw.generate(query.param, query.length) + "' }").on('err', (e) => log.console('fail', e))
+        res.send('{"success": true, "content": "' + pw.generate(query.param, query.length) + '"}').on('err', (e) => log.console('fail', e))
     } else if (query.type == 'passphrase') {
-        res.send("{ 'success': 'true', 'content': '" + pp.generate(query.param, query.length, query.delimiter) + "' }").on('err', (e) => log.console('fail', e))
+        res.send('{"success": true, "content": "' + pp.generate(query.param, query.length, query.delimiter) + '"}').on('err', (e) => log.console('fail', e))
     } else {
-        res.status(400).send("{ 'success': 'false', 'content': 'lmao bad request try again'")
+        res.status(400).send('{"success": false, "content": "lmao bad request try again"}')
     }
     if (conf.tele) {log.console('info', 'someone just generated a ' + query.type)}
 

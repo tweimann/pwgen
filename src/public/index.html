@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://content.tweimann.xyz/fonts/Roboto-Regular.ttf" rel="stylesheet">
+    <link href="https://content.tweimann.xyz/fonts/Roboto-Regular.ttf" rel="fonts">
     <link href="style.css" rel="stylesheet">
     <title>pwgen</title>
   </head>
@@ -21,21 +21,21 @@
           <p class="h4">Charset</p>
           <div class="form-group" style="margin-right: 5px; float: none;">
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox" id="param-pw-lowercase" value="yes"> Lowercase
+              <input type="checkbox" id="param-pw-lowercase" checked> Lowercase
             </label>
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox" id="param-pw-uppercase" value="yes"> Uppercase
+              <input type="checkbox" id="param-pw-uppercase" checked> Uppercase
             </label>
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox" id="param-pw-numbers" value="yes"> Numbers
+              <input type="checkbox" id="param-pw-numbers" checked> Numbers
             </label>
             <label class="checkbox">
-              <input type="checkbox" id="param-pw-symbols" value="yes"> Symbols
+              <input type="checkbox" id="param-pw-symbols" checked> Symbols
             </label>
             <hr>
             <p class="h4">Extras</p>
             <label class="checkbox">
-              <input type="checkbox" id="param-pw-ambiguous" value="yes"> Avoid Ambiguous Characters
+              <input type="checkbox" id="param-pw-ambiguous"> Avoid Ambiguous Characters
             </label>
             <hr>
             <p class="h4">Length</p>
@@ -60,38 +60,49 @@
           <p class="h4">Wordlists</p>
           <div class="form-group" style="margin-right: 0px; float: none;">
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox"> German
+              <input type="checkbox" id="params-pp-wl_de"> German
             </label>
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox"> English
+              <input type="checkbox" id="params-pp-wl_en" checked> English
             </label>
             <label class="checkbox" style="margin-right: 10px;">
-              <input type="checkbox"> Names
+              <input type="checkbox" id="params-pp-wl_names"> Names
             </label>
             <hr>
             <p class="h4">Extras</p>
+            <label class="checkbox" style="margin-right: 10px;">
+              <input type="checkbox" id="params-pp-num" checked> Add a Number
+            </label>
             <label class="checkbox">
-              <input type="checkbox"> Add a Number
+              <input type="checkbox" id="params-pp-capitalize" checked> Capitalize first letter
             </label>
             <br><br>
             <div class="input-group mb-3">
               <span class="input-group-text">Delimiter</span>
-              <input type="text" class="form-control" value="-">
+              <input type="text" class="form-control" value="-" id="params-pp-delimiter">
               <span class="input-group-text">Length</span>
-              <input type="text" class="form-control" value="4">
+              <input type="text" class="form-control" value="4" placeholder="max: 8" id="params-pp-length">
             </div>              
             <hr>
-            <input class="btn btn-primary form-control" type="submit" value="Submit">
+            <input class="btn btn-primary form-control" type="submit" value="Submit" onclick="submitPassphrase()">
             <br><br>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon3">Output</span>
-              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
+              <input type="text" class="form-control" aria-describedby="basic-addon3" id="pp-output" readonly>
             </div>              
           </div>
         </div>
       </div>
     </div>
     <!--Bootstrap end-->
+
+    <div class="footer-div">
+      <div class="footer-text">
+          tweimann 2022 &#8226;
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/tweimann/pwgen">Github</a> &#8226;
+          <a href="/imprint">Imprint</a>
+      </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="bootstrap/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

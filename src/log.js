@@ -18,6 +18,8 @@ module.exports = {
         else if (type == "fail") {var prefix = prefixes.fail}
         else {var prefix = prefixes.info}
 
+        prefix = colors.dim('[' + new Date().toISOString().split(".")[0] + '] ') + prefix
+
         msg.split('\n').forEach( (e) => {
             console.log(prefix + e)
         })

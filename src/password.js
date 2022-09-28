@@ -6,6 +6,9 @@ module.exports = {
         let charList = []
         let output = ""
 
+        if (param == "") {param = "aAns"}
+        if (length > 128) {length = 128}
+
         // generate charList to chose characters from
         if(param.match("a")) {
             charList.push(alphabet.toLowerCase())
@@ -17,7 +20,7 @@ module.exports = {
             charList.push("0123456789")
         }
         if(param.match("s")) {
-            charList.push("!§$%&/?=+-_*#:;.,<>{}[]()")
+            charList.push("!&/?=+-_*#:()")
         }
 
         // join charList

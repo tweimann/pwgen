@@ -20,6 +20,9 @@ module.exports = {
         let output = ""
         let word = ""
 
+        if (param == "") {param = "CE0"}
+        if (length > 8) {length = 8}
+
         // define usable words
         if (param.match("D")) {
             wl_de.content.map(item => {

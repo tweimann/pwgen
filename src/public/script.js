@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 function refreshPWLength(id, value) {
     if (id == "param-pw-length") {
         document.getElementById("param-pw-range").value = document.getElementById(id).value
@@ -10,25 +8,51 @@ function refreshPWLength(id, value) {
 }
 
 function submitPassword() {
-    let lowercase = document.getElementById("param-pw-lowercase").value
-    let uppercase = document.getElementById("param-pw-uppercase").value
-    let numbers = document.getElementById("param-pw-numbers").value
-    let symbols = document.getElementById("param-pw-symbols").value
-    let ambiguous = document.getElementById("param-pw-ambiguous").value
+    let lowercase = document.getElementById("param-pw-lowercase").checked
+    let uppercase = document.getElementById("param-pw-uppercase").checked
+    let numbers = document.getElementById("param-pw-numbers").checked
+    let symbols = document.getElementById("param-pw-symbols").checked
+    let ambiguous = document.getElementById("param-pw-ambiguous").checked
     let length = document.getElementById("param-pw-length").value
 
     let params = ""
 
-    if (lowercase == "on") { params += "a" }
-    if (uppercase == "on") { params += "A" }
-    if (numbers == "on") { params += "n" }
-    if (symbols == "on") { params += "s" }
-    if (ambiguous == "on") { params += "O" }
+    if (lowercase == true) { params += "a" }
+    if (uppercase == true) { params += "A" }
+    if (numbers == true) { params += "n" }
+    if (symbols == true) { params += "s" }
+    if (ambiguous == true) { params += "O" }
 
-    fetch('http://' + location.hostname + '/api?type=password&param=' + params + '&length=' + length)
+    fetch('https://' + location.hostname + '/api?type=password&param=' + params + '&length=' + length)
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById("pw-output").value = JSON.parse(data).content
+            document.getElementById("pw-output").value = data.content
+        })
+    
+}
+
+function submitPassphrase() {
+    let wl_de = document.getElementById("params-pp-wl_de").checked
+    let wl_en = document.getElementById("params-pp-wl_en").checked
+    let wl_names = document.getElementById("params-pp-wl_names").checked
+    let number = document.getElementById("params-pp-num").checked
+    let capitalize = document.getElementById("params-pp-capitalize").checked
+    let delimiter = document.getElementById("params-pp-delimiter").value
+    let length = document.getElementById("params-pp-length").value
+
+    let params = ""
+
+    if (wl_de == true) { params += "D" }
+    if (wl_en == true) { params += "E" }
+    if (wl_names == true) { params += "N" }
+    if (capitalize == true) { params += "C" }
+    if (number == true) { params += "0" }
+
+    fetch('https://' + location.hostname + '/api?type=passphrase&param=' + params + '&length=' + length + '&delimiter=' + delimiter)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            document.getElementById("pp-output").value = data.content
         })
     
 }

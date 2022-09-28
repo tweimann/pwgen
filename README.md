@@ -28,4 +28,6 @@ sed 's/.*/"&",/g' wl_names.txt > wl_names.txt.test
 
 ### used libraries
 - [colors](https://www.npmjs.com/package/colors)
-- [vue](https://www.npmjs.com/package/vue)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [express](https://www.npmjs.com/package/express)
+- [querystring](https://www.npmjs.com/package/querystring)

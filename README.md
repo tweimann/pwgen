@@ -1,5 +1,6 @@
 # pwgen
-docker-ready password generator
+docker-ready password and passphrase generator
+check out the docker-image at [tweimann/pwgen](https://hub.docker.com/r/tweimann/pwgen)
 
 ## credits
 ### files used for passphrase-generation

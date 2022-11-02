@@ -28,12 +28,21 @@ app.get('/imprint', function(req, res){
 app.get('/api', function (req, res) {
     // parse request
     let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
+    let output = {
+        "success": true,
+        "content": ""
+    }
+    
     if (query.type == 'password') {
-        res.send('{"success": true, "content": "' + pw.generate(query.param, query.length) + '"}').on('err', (e) => log.console('fail', e))
+        output.content = pw.generate(query.param, query.length)
+        res.send(output).on('err', (e) => log.console('fail', e))
     } else if (query.type == 'passphrase') {
-        res.send('{"success": true, "content": "' + pp.generate(query.param, query.length, query.delimiter) + '"}').on('err', (e) => log.console('fail', e))
+        output.content = pp.generate(query.param, query.length, query.delimiter)
+        res.send(output).on('err', (e) => log.console('fail', e))
     } else {
-        res.status(400).send('{"success": false, "content": "lmao bad request try again"}')
+        output.success = false
+        output.content = "lmao bad request try again"
+        res.status(400).send(output)
     }
     if (conf.tele) {log.console('info', 'someone just generated a ' + query.type)}
 

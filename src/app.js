@@ -1,7 +1,9 @@
-// imports
+// import other files
 const log = require('./log.js');
 const pw = require('./password.js');
 const pp = require('./passphrase.js');
+
+// import packages
 const { config } = require('dotenv');
 config();
 const express = require('express');
@@ -44,7 +46,7 @@ app.get('/api', function (req, res) {
     let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
     if (!query.delimiter) {query.delimiter = "-"}
     
-    // validate request
+    // validate the request
     if (
         String(query.type) && query.type.length() <= 10 && 
         String(query.param) && query.param.length() <= 8 && 
@@ -62,6 +64,7 @@ app.get('/api', function (req, res) {
         return false
     }
     
+    // generate the password and respond to the request
     if (valid.type == 'password') {
         output.content = pw.generate(valid.param, valid.length)
         res.send(output).on('err', (e) => log.console('fail', e))
@@ -71,8 +74,7 @@ app.get('/api', function (req, res) {
     } else {
         badReq(output, res)
     }
-    if (conf.tele) {log.console('info', 'someone just generated a ' + valid.type)}
-
+    if (conf.tele) { log.console('info', 'someone just generated a ' + valid.type) }
 })
 
 // listen on port defined in dotenv

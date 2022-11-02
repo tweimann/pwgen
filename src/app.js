@@ -54,10 +54,10 @@ app.get('/api', function (req, res) {
         String(query.delimiter) && query.delimiter.length() <= 3
        ) {
         let valid = {
-            "type" = query.type,
-            "param" = query.param,
-            "length" = query.length,
-            "delimiter" = query.delimiter
+            "type": query.type,
+            "param": query.param,
+            "length": query.length,
+            "delimiter": query.delimiter
         }
     } else {
         badReq(output, res)

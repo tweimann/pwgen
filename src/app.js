@@ -16,6 +16,14 @@ const conf = {
     "port": process.env.PORT
 }
 
+// declare function for when a api request is bad
+function badReq(output, res) {
+    output.success = false
+    output.content = "lmao bad request try again"
+    res.status(400).send(output)
+    return true
+}
+
 // serve static pages
 app.use(express.static('src/public'))
 
@@ -26,23 +34,36 @@ app.get('/imprint', function(req, res){
 
 // api code to get passwords/phrases
 app.get('/api', function (req, res) {
-    // parse request
-    let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
+    // define output format
     let output = {
         "success": true,
         "content": ""
     }
     
+    // parse request
+    let query = JSON.parse('{"' + req._parsedOriginalUrl.query.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
+    if (!query.delimiter) {query.delimiter = "-"}
+    
+    // validate request
+    if (String(query.delimiter) && !isNaN(query.length) && String(query.delimiter)) {
+        let valid = {
+            "param" = query.param,
+            "length" = query.length,
+            "delimiter" = query.delimiter
+        }
+    } else {
+        badReq(output, res)
+        return false
+    }
+    
     if (query.type == 'password') {
-        output.content = pw.generate(query.param, query.length)
+        output.content = pw.generate(valid.param, valid.length)
         res.send(output).on('err', (e) => log.console('fail', e))
     } else if (query.type == 'passphrase') {
-        output.content = pp.generate(query.param, query.length, query.delimiter)
+        output.content = pp.generate(valid.param, valid.length, valid.delimiter)
         res.send(output).on('err', (e) => log.console('fail', e))
     } else {
-        output.success = false
-        output.content = "lmao bad request try again"
-        res.status(400).send(output)
+        badReq(output, res)
     }
     if (conf.tele) {log.console('info', 'someone just generated a ' + query.type)}
 

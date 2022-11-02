@@ -2,7 +2,7 @@ module.exports = {
     generate: function (param, length) {
         // define vars
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
-        const ambiguous = "lI1O0"
+        const ambiguous = "lI1O0:;"
         let charList = []
         let output = ""
 
@@ -20,7 +20,7 @@ module.exports = {
             charList.push("0123456789")
         }
         if(param.match("s")) {
-            charList.push("!&/?=+-_*#:()")
+            charList.push("!&/?=+-_*#:;(){}[]")
         }
 
         // join charList

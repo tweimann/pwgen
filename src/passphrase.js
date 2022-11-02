@@ -1,6 +1,7 @@
 // imports
 const log = require('./log.js')
 
+// import wordlists
 const wl_de = require('./wordlists/de.json')
 const wl_en = require('./wordlists/en.json')
 const wl_names = require('./wordlists/names.json')
@@ -20,29 +21,15 @@ module.exports = {
         let output = ""
         let word = ""
 
-        if (param == "") {param = "CE0"}
-        if (length > 8) {length = 8}
+        if (param == "") { param = "CE0" }
+        if (length > 8) { length = 8 }
 
         // define usable words
-        if (param.match("D")) {
-            wl_de.content.map(item => {
-                usableWords.push(item)
-            })
-        }
-        if (param.match("E")) {
-            wl_en.content.map(item => {
-                usableWords.push(item)
-            })
-        }
-        if (param.match("N")) {
-            wl_names.content.map(item => {
-                usableWords.push(item)
-            })
-        }
+        if (param.match("D")) { wl_de.content.map(item => { usableWords.push(item) }) }
+        if (param.match("E")) { wl_en.content.map(item => { usableWords.push(item) }) }
+        if (param.match("N")) { wl_names.content.map(item => { usableWords.push(item) }) }
 
-        if (!delimiter) {
-            delimiter = "-"
-        }
+        if (!delimiter) { delimiter = "-" }
 
         // build the passphrase
         for (let i = 0; i < length; i++) {
@@ -51,11 +38,11 @@ module.exports = {
             if (param.match("0") && !(/\d/g.test(passphrase)) && (Math.random() >= ((length - i + 1) / 10))) {
                 num = Math.floor(Math.random() * 9)
             }
+            
             // don't add a delimiter after the last word
-            if (i == length - 1) {
-                delimiter = ""
-            }
-        
+            if (i == length - 1) { delimiter = "" }
+            
+            // decide if first letter of word should
             if (param.match("C")) {
                 word = capitalizeFirstLetter(String(usableWords[Math.floor(Math.random() * usableWords.length)]))
             } else {
@@ -63,9 +50,7 @@ module.exports = {
             }
             
             // combine the passphrase
-            passphrase += word
-                        + num
-                        + delimiter
+            passphrase += word + num + delimiter
         }
 
         output = passphrase

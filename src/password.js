@@ -10,18 +10,10 @@ module.exports = {
         if (length > 128) {length = 128}
 
         // generate charList to chose characters from
-        if(param.match("a")) {
-            charList.push(alphabet.toLowerCase())
-        }
-        if(param.match("A")) {
-            charList.push(alphabet.toUpperCase())
-        }
-        if(param.match("n")) {
-            charList.push("0123456789")
-        }
-        if(param.match("s")) {
-            charList.push("!&/?=+-_*#:;(){}[]")
-        }
+        if (param.match("a")) { charList.push(alphabet.toLowerCase()) }
+        if (param.match("A")) { charList.push(alphabet.toUpperCase()) }
+        if (param.match("n")) { charList.push("0123456789") }
+        if (param.match("s")) { charList.push("!&/?=+-_*#:;(){}[]") }
 
         // join charList
         charList = charList.join("")

@@ -45,8 +45,14 @@ app.get('/api', function (req, res) {
     if (!query.delimiter) {query.delimiter = "-"}
     
     // validate request
-    if (String(query.param) && query.param.length() <= 8 && !isNaN(query.length) && query.length <= 128 && String(query.delimiter) && query.delimiter.length() <= 3) {
+    if (
+        String(query.type) && query.type.length() <= 10 && 
+        String(query.param) && query.param.length() <= 8 && 
+        !isNaN(query.length) && query.length <= 128 && 
+        String(query.delimiter) && query.delimiter.length() <= 3
+       ) {
         let valid = {
+            "type" = query.type,
             "param" = query.param,
             "length" = query.length,
             "delimiter" = query.delimiter
@@ -56,16 +62,16 @@ app.get('/api', function (req, res) {
         return false
     }
     
-    if (query.type == 'password') {
+    if (valid.type == 'password') {
         output.content = pw.generate(valid.param, valid.length)
         res.send(output).on('err', (e) => log.console('fail', e))
-    } else if (query.type == 'passphrase') {
+    } else if (valid.type == 'passphrase') {
         output.content = pp.generate(valid.param, valid.length, valid.delimiter)
         res.send(output).on('err', (e) => log.console('fail', e))
     } else {
         badReq(output, res)
     }
-    if (conf.tele) {log.console('info', 'someone just generated a ' + query.type)}
+    if (conf.tele) {log.console('info', 'someone just generated a ' + valid.type)}
 
 })
 

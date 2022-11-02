@@ -1,6 +1,7 @@
 # pwgen
-docker-ready password and passphrase generator
-check out the docker-image at [tweimann/pwgen](https://hub.docker.com/r/tweimann/pwgen)
+docker-ready web 3.0 blockchain metaverse password and passphrase generator  
+check out the docker-image at [tweimann/pwgen](https://hub.docker.com/r/tweimann/pwgen)  
+try the demo at [pwgen.twei.space](https://pwgen.twei.space)
 
 ## installation
 to run the image, execute the following command:
@@ -9,10 +10,10 @@ docker run -p 5000:5000\
   -e PORT=5000\
   -e DEBUG=false\
   -e TELEMETRY=false\
-  -e IMPRINTADDR="<link-to-your-imprint-goes-here>"\
+  -e IMPRINTADDR=<link-to-your-imprint-goes-here>\
   tweimann/pwgen
 ```
-this will automatically run the image and forward the port 5000 to access the web page
+this will automatically run the image and forward the port 5000 to access the web page. if you use a reverse proxy (e.g. NGINX) you shouldn't forward the port
 
 ## intention
 - i wanted to solve the following errors in current password generators:
@@ -21,9 +22,14 @@ this will automatically run the image and forward the port 5000 to access the we
 - this is just a project i sometimes work on in my free-time, so there isn't any real support or regular updates
 
 ## things to know
-- input validation is kinda shit rn, working on that
 - the passwords/-phrases are generated server-side. in the future, the passwords might be generated client-side, but the wordlists used for the passphrases are too big to download them every time you load the page (about 4 MB vs 200 KB)
 - site is not optimized for mobile usage (yet). it's usable, but not good
+
+## to-do
+- [ ] input validation
+- [ ] client-side password generation
+- [ ] optimization for mobile devices
+- [ ] fix the german wordlist
 
 ## credits
 ### files used for passphrase-generation

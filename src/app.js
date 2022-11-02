@@ -45,7 +45,7 @@ app.get('/api', function (req, res) {
     if (!query.delimiter) {query.delimiter = "-"}
     
     // validate request
-    if (String(query.delimiter) && !isNaN(query.length) && String(query.delimiter)) {
+    if (String(query.param) && query.param.length() <= 8 && !isNaN(query.length) && query.length <= 128 && String(query.delimiter) && query.delimiter.length() <= 3) {
         let valid = {
             "param" = query.param,
             "length" = query.length,

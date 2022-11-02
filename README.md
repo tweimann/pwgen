@@ -12,6 +12,18 @@ docker run -p 5000:5000\
   -e IMPRINTADDR="<link-to-your-imprint-goes-here>"\
   tweimann/pwgen
 ```
+this will automatically run the image and forward the port 5000 to access the web page
+
+## intention
+- i wanted to solve the following errors in current password generators:
+  - most password generators are not (F)OSS and also not easily deployable over docker
+  - i mostly use passphrases, but the only good passphrase generator i found so far is the one from bitwarden
+- this is just a project i sometimes work on in my free-time, so there isn't any real support or regular updates
+
+## things to know
+- input validation is kinda shit rn, working on that
+- the passwords/-phrases are generated server-side. in the future, the passwords might be generated client-side, but the wordlists used for the passphrases are too big to download them every time you load the page (about 4 MB vs 200 KB)
+- site is not optimized for mobile usage (yet). it's usable, but not good
 
 ## credits
 ### files used for passphrase-generation
@@ -21,7 +33,7 @@ docker run -p 5000:5000\
 ```bash
 grep -x '[[:alpha:]]*' <path-to-txt-file> > wl_<scope>.txt
 ```
-- and this command to kind-of convert the others to json:
+- and this command to sort-of convert the lists to json:
 ```bash
 sed 's/.*/"&",/g' wl_names.txt > wl_names.txt.test
 ```

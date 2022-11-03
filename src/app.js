@@ -12,7 +12,7 @@ const querystring = require('querystring');
 
 // get dotenv vars
 const conf = {
-    "debug": process.env.DEBUG,
+    "debug": process.env.DEBUG == 'true' ? true : false,
     "tele": process.env.TELEMETRY,
     "imprint": process.env.IMPRINTADDR,
     "port": process.env.PORT

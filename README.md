@@ -26,7 +26,7 @@ this will automatically run the image and forward the port 5000 to access the we
 - site is not optimized for mobile usage (yet). it's usable, but not good
 
 ## to-do
-- [ ] input validation
+- [x] input validation
 - [ ] client-side password generation
 - [ ] optimization for mobile devices
 - [ ] fix the german wordlist

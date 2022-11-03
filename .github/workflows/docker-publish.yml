@@ -29,7 +29,7 @@ jobs:
         with:
           images: tweimann/pwgen
           tags: |
-              type=sha,prefix={{branch}}-
+              type=sha,prefix=build-
               type=raw,value=latest
 
       - name: Build and push

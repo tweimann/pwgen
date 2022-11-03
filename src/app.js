@@ -53,13 +53,14 @@ app.get('/api', function (req, res) {
         "len": 0,
         "delimiter": ""
     }
+    if (conf.debug == true) { log.console('debug', query) }
     if (
         String(query.type).length <= 10 && // check if "type" is string and max 10 chars (e.g. password)
         String(query.param).length <= 8 && // check if "param" is string and max 8 chars (e.g. aAns)
         !isNaN(query.len) && query.len <= 128 && // check if "len" is int and max value is 128 (e.g. 32)
         String(query.delimiter).length <= 3 // check if "delimiter" is string and max 3 chars (e.g. ---)
        ) {
-        let valid = {
+        valid = {
             "type": query.type,
             "param": query.param,
             "len": query.len,

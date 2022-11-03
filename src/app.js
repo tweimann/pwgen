@@ -48,10 +48,10 @@ app.get('/api', function (req, res) {
     
     // validate the request
     if (
-        String(query.type) && query.type.length() <= 10 && 
-        String(query.param) && query.param.length() <= 8 && 
+        String(query.type).length() <= 10 && 
+        String(query.param).length() <= 8 && 
         !isNaN(query.len) && query.len <= 128 && 
-        String(query.delimiter) && query.delimiter.length() <= 3
+        String(query.delimiter).length() <= 3
        ) {
         let valid = {
             "type": query.type,

@@ -23,7 +23,7 @@ function submitPassword() {
     if (symbols == true) { params += "s" }
     if (ambiguous == true) { params += "O" }
 
-    fetch('https://' + location.hostname + '/api?type=password&param=' + params + '&length=' + length)
+    fetch('https://' + location.hostname + '/api?type=password&param=' + params + '&len=' + length)
         .then((response) => response.json())
         .then((data) => {
             document.getElementById("pw-output").value = data.content
@@ -48,7 +48,7 @@ function submitPassphrase() {
     if (capitalize == true) { params += "C" }
     if (number == true) { params += "0" }
 
-    fetch('https://' + location.hostname + '/api?type=passphrase&param=' + params + '&length=' + length + '&delimiter=' + delimiter)
+    fetch('https://' + location.hostname + '/api?type=passphrase&param=' + params + '&len=' + length + '&delimiter=' + delimiter)
         .then((response) => response.json())
         .then((data) => {
             console.log(data)

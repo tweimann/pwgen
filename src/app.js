@@ -50,13 +50,13 @@ app.get('/api', function (req, res) {
     if (
         String(query.type) && query.type.length() <= 10 && 
         String(query.param) && query.param.length() <= 8 && 
-        !isNaN(query.length) && query.length <= 128 && 
+        !isNaN(query.len) && query.len <= 128 && 
         String(query.delimiter) && query.delimiter.length() <= 3
        ) {
         let valid = {
             "type": query.type,
             "param": query.param,
-            "length": query.length,
+            "len": query.len,
             "delimiter": query.delimiter
         }
     } else {
@@ -66,10 +66,10 @@ app.get('/api', function (req, res) {
     
     // generate the password and respond to the request
     if (valid.type == 'password') {
-        output.content = pw.generate(valid.param, valid.length)
+        output.content = pw.generate(valid.param, valid.len)
         res.send(output).on('err', (e) => log.console('fail', e))
     } else if (valid.type == 'passphrase') {
-        output.content = pp.generate(valid.param, valid.length, valid.delimiter)
+        output.content = pp.generate(valid.param, valid.len, valid.delimiter)
         res.send(output).on('err', (e) => log.console('fail', e))
     } else {
         badReq(output, res)

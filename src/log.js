@@ -20,6 +20,6 @@ module.exports = {
 
         prefix = colors.dim('[' + new Date().toISOString().split(".")[0] + '] ') + prefix
 
-        msg.split('\n').forEach((e) => { console.log(prefix + e) })
+        String(msg).split('\n').forEach((e) => { console.log(prefix + e) })
     }
 }
